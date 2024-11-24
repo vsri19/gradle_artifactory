@@ -4,13 +4,12 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'chmod +x ./gradlew'
-                sh './gradlew clean build --refresh-dependencies --info'
+                sh 'gradle clean build --refresh-dependencies --info'
             }
         }
         stage('publish') {
             steps {
-                sh './gradlew artifactoryPublish'
+                sh 'gradle artifactoryPublish'
             }
         }
     }
