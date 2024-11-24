@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'gradle clean build --refresh-dependencies --info'
+                sh './gradlew clean build --refresh-dependencies --info'
             }
         }
         stage('publish') {
             steps {
-                sh 'gradle artifactoryPublish'
+                sh './gradlew artifactoryPublish'
             }
         }
     }
