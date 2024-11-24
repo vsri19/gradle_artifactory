@@ -1,10 +1,25 @@
 pipeline {
     agent any
+
     stages {
-        stage('Gradle') {
+        stage('build') {
             steps {
-                sh 'gradle --version'
+                sh 'gradle clean build --refresh-dependencies --info'
             }
+        }
+        stage('publish') {
+            steps {
+                sh 'gradle artifactoryPublish'
+            }
+        }
+    }
+
+    post{
+        success{
+            echo 'Build success'
+        }
+        failure{
+            echo 'Build Failed!!'
         }
     }
 }
