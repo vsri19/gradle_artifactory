@@ -5,12 +5,12 @@ pipeline {
         stage('build') {
             steps {
                 sh 'chmod +x ./gradlew'
-                bat './gradlew clean build --refresh-dependencies --info'
+                sh './gradlew clean build --refresh-dependencies --info'
             }
         }
         stage('publish') {
             steps {
-                bat './gradlew artifactoryPublish'
+                sh './gradlew artifactoryPublish'
             }
         }
     }
