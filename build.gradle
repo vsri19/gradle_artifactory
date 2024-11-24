@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         maven {
-            url "http://localhost:8082/artifactory/repo1-gradle-dev/"
+            url "https://localhost:8082/artifactory/repo1-gradle-dev/"
             allowInsecureProtocol = true
             credentials {
                 username = "${artifactory_user}"
@@ -17,7 +17,7 @@ buildscript {
 allprojects {
     repositories {
         maven {
-            url "http://127.0.0.1:8081/artifactory/libs-release"
+            url "https://127.0.0.1:8081/artifactory/libs-release"
         }
     }
 }
@@ -39,7 +39,7 @@ publishing {
 }
 
 artifactory {
-    contextUrl = 'http://127.0.0.1:8081/artifactory'
+    contextUrl = 'https://127.0.0.1:8081/artifactory'
     publish {
         repository {
             repoKey = 'repo1-gradle-dev-local'
