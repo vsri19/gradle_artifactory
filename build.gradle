@@ -1,0 +1,61 @@
+buildscript {
+    repositories {
+        maven {
+            url "http://localhost:8082/artifactory/repo1-gradle-dev/"
+            allowInsecureProtocol = true
+            credentials {
+                username = "${artifactory_user}"
+                password = "${artifactory_password}"
+            }
+        }
+    }
+    dependencies {
+        classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.+')
+    }
+}
+
+allprojects {
+    repositories {
+        maven {
+            url "http://127.0.0.1:8081/artifactory/libs-release"
+        }
+    }
+}
+
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+dependencies {
+    testImplementation 'junit:junit:4.7'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+artifactory {
+    contextUrl = 'http://127.0.0.1:8081/artifactory'
+    publish {
+        repository {
+            repoKey = 'repo1-gradle-dev-local'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+            
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'repo1-gradle-dev'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+            
+        }
+    }
+}
