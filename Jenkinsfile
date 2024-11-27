@@ -23,11 +23,6 @@ pipeline {
 
                 // Define the location of your artifacts
                 def artifactDir = '/path/to/your/artifacts' // Adjust this to your actual artifact path
-
-                // Cleanup: Remove files older than 1 minute
-                sh """
-                find ${artifactDir} -type f -mmin +${expireInMinutes} -exec rm -f {} \;
-                """
             }
         }
         failure {
