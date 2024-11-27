@@ -22,7 +22,7 @@ pipeline {
                 def expireInMinutes = 1 // Expire artifacts after 1 minute
 
                 // Define the location of your artifacts
-                def artifactDir = '/path/to/your/artifacts' // Adjust this to your actual artifact path
+                def artifactDir = 'http://artifactory:8081/artifactory' // Adjust this to your actual artifact path
             }
         }
         failure {
